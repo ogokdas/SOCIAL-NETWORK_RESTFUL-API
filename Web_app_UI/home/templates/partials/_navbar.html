@@ -1,0 +1,102 @@
+<nav class="navbar navbar-expand-lg navbar-light fixed-top" style="background-color: skyblue;">
+    <div class="container-fluid" style="font-family: 'Courier New'; font-weight:bold">
+      <a class="navbar-brand" href="{% url 'home' %}">d-Blog</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+        </ul>
+
+          <ul class="navbar-nav mr-auto">
+              {% if 'session_id' in request.session %}
+
+                  <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="{% url 'profile' %}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{ request_user.first_name | title }} {{ request_user.last_name | title }}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                        {% url 'home' as blog_url %}
+{% if request.path == blog_url %}
+    <img src="{{ 'http://127.0.0.1:8001'|add:user_profile.profile_img  }}" class="card-img-top dropdown-item" style="height: 100px; width: auto; margin-left: 1px" alt="...">
+    {% endif %}
+
+            {% url 'home_' as blog_url %}
+{% if request.path == blog_url %}
+    <img src="{{ 'http://127.0.0.1:8001'|add:user_profile.profile_img  }}" class="card-img-top dropdown-item" style="height: 100px; width: auto; margin-left: 1px" alt="...">
+    {% endif %}
+
+                    {% url 'settings' as blog_url %}
+{% if request.path == blog_url %}
+    <img src="{{ 'http://127.0.0.1:8001'|add:profile.profile_img  }}" class="card-img-top dropdown-item" style="height: 100px; width: auto; margin-left: 1px" alt="...">
+    {% endif %}
+
+                    {% url 'profiledetail' profiledetail.slug as blog_url %}
+{% if request.path == blog_url %}
+    <img src="{{ 'http://127.0.0.1:8001'|add:profiledetail.profile_img  }}" class="card-img-top dropdown-item" style="height: 100px; width: auto; margin-left: 1px" alt="...">
+    {% endif %}
+
+                            {% url 'details' post.slug as blog_url %}
+{% if request.path == blog_url %}
+    <img src="{{ 'http://127.0.0.1:8001'|add:profile_user.profile_img  }}" class="card-img-top dropdown-item" style="height: 100px; width: auto; margin-left: 1px" alt="...">
+    {% endif %}
+
+
+                                    {% url 'post' as blog_url %}
+{% if request.path == blog_url %}
+    <img src="{{ 'http://127.0.0.1:8001'|add:user_profile.profile_img  }}" class="card-img-top dropdown-item" style="height: 100px; width: auto; margin-left: 1px" alt="...">
+    {% endif %}
+
+                    {% url 'register' as blog_url %}
+{% if request.path == blog_url %}
+    <img src="{{ 'http://127.0.0.1:8001'|add:user_profile.profile_img  }}" class="card-img-top dropdown-item" style="height: 100px; width: auto; margin-left: 1px" alt="...">
+    {% endif %}
+
+                            {% url 'profile' as blog_url %}
+{% if request.path == blog_url %}
+    <img src="{{ 'http://127.0.0.1:8001'|add:user_profile.profile_img  }}" class="card-img-top dropdown-item" style="height: 100px; width: auto; margin-left: 1px" alt="...">
+    {% endif %}
+
+                    {% url 'categories' kategoriler.slug as blog_url %}
+{% if request.path == blog_url %}
+    <img src="{{  'http://127.0.0.1:8001'|add:profile__.profile_img }}" class="card-img-top dropdown-item" style="height: 100px; width: auto; margin-left: 1px" alt="...">
+    {% endif %}
+
+
+          <a class="dropdown-item" href="{% url 'post' %}">Post</a>
+          <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="{% url 'profile' %}">Profile</a>
+        </div>
+      </li>
+
+              {% else %}
+                                <li class="nav-item">
+                                <a class="nav-link active" href="{% url 'login' %}">Login</a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="{% url 'register' %}">Register</a>
+                                </li>
+              {% endif %}
+          </ul>
+{% url 'home' as blog_url %}
+{% if request.path == blog_url %}
+      <form class="d-flex" role="search" placeholder="Search" method="post" action="{% url 'home' %}">
+    {% csrf_token %}
+    <input style="font-family: Courier New; font-size: 12px" class="form-control me-2" type="search" placeholder="profile names" aria-label="Search" name="profile_s">
+    <button class="btn btn-outline-success" type="submit">Search</button>
+</form>
+{% endif %}
+
+
+  </div>
+    </div>
+</nav>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

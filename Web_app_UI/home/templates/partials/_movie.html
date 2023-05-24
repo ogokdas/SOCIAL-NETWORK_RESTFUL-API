@@ -1,0 +1,51 @@
+{% load static %}
+
+<div class="card text-right" style="font-size: 14px; font-family: 'Courier New'">
+    {% for foo in profiles_ %}
+        {% if foo.user.username == film.user %}
+            <a href="{% url 'profiledetail' foo.slug %}"><small class="text-muted" style="font-weight: bolder">{{ foo.user.first_name }}</small></a>
+        {% endif %}
+    {% endfor %}
+
+        <a href="{% url 'details' film.slug %}">
+            <img src="{{ 'http://127.0.0.1:8001'|add:film.image }}" class="card-img-top" alt="...">
+        </a>
+
+    <ul class="list-group">
+    <li class="list-group-item"> <h5 class="card-title" style="font-weight:bold">{{ film.caption }}</h5></li>
+        <a href="{% url 'details' film.slug %}" class="tab-content">
+    <li class="list-group-item font-size: 2px">{{ film.content | truncatechars:100 |safe}}</li></a>
+    </ul>
+
+    <div class="card-body">
+        <form action="{% url 'home' %}" method="post">
+            {% csrf_token %}
+        <input type="hidden" name="post_id" value="{{ film.id }}">
+        {% if likedPost %}
+            {% if film.id|safe in likedPost %}
+                <button style="background:none;border:none;" value="1" name="like">
+                    <img src="{% static '/img/like_.png' %}" alt="Like" style="width: 25px; height: 25px" id="resim_">
+                </button>
+
+            {% else %}
+                <button style="background:none;border:none;" value="2" name="like">
+                <img src="{% static '/img/dislike_.png' %}" alt="Like" style="width: 25px; height: 25px" id="resim1">
+                </button>
+
+            {% endif %}
+        {% else %}
+                <button style="background:none;border:none;" value="3" name="like">
+                <img src="{% static '/img/dislike_.png' %}" alt="Like" style="width: 25px; height: 25px" id="resim2">
+                </button>
+        {% endif %}
+
+            <span class="likes">{{ film.no_of_likes }}</span>
+        </form>
+    </div>
+
+                                    <div class="d-flex justify-content-between align-items-center">
+                                    <small class="text-muted">{{ film.category.category }}</small>
+                                    <small class="text-muted">{{ film.created_at|date:"Y-m-d H:i:s" }}</small>
+                                </div>
+
+</div>

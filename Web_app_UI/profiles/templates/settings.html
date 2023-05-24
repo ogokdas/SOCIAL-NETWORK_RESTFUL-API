@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <style>
+    .n
+    {color: black;text-align: center;margin-top:100px}
+     .kutu{width: 350px;
+      height:350px;
+      border: 1px solid #000; margin:auto;margin-top: 100px;
+      }
+     .dov
+     {color: black;text-align: center; margin-top: 5px}
+     .mm
+     {text-align: center; margin-top: 5px}
+  </style>
+    <meta charset="UTF-8">
+    <title>Profile setting</title>
+</head>
+<body>
+
+    {% include 'partials/_navbar.html' %}
+
+<div class="kutu">
+  <h1 style="text-align: center; margin-top: 10px">
+    Profile Settings
+  </h1>
+
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+  <div class="dov">
+    Job Title
+  </div>
+  <div class="mm">
+  <label for="Memo"></label>
+<input type="text" id="Memo" name="job_name" placeholder="" value="{{ profile.job }}">
+</div>
+
+  <div class="dov">
+   Location
+  </div>
+  <div class="mm">
+  <label for="Omer"></label>
+<input type="text" id="Omer" name="location_name" placeholder="" value="{{ profile.location }}">
+</div>
+
+  <div class="mm">
+    <div class="mb-3" style="margin-left: auto; margin-right: auto;">
+  <label for="formFile" class="form-label">Choose a Photo</label>
+  <input class="file" style="margin-left: 80px" type="file" id="formFile" name="profileImage_name">
+</div>
+
+         <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-3">Submit</button>
+        </div>
+  </div>
+</form>
+
+</div>
+
+
+</body>
+</html>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>

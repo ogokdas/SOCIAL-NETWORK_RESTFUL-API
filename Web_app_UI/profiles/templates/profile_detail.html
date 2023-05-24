@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <style>
+
+        .kutu{width: 300px;
+      height:310px;
+      border: 1px solid #000;margin: auto;margin-top: 100px;
+      }
+        .n
+        {color: black;
+            text-align: center
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+
+</head>
+<body>
+
+    {% include 'partials/_navbar.html' %}
+
+    <div class="container mt-3" style="padding-top: 50px">
+        <div class="row">
+
+
+            <div class="col-md-4" >
+                <div class="kutu">
+    <h3 style="margin-left: 10px">Profile</h3>
+        <div style="margin-left: 10px">
+            <img src="{{ 'http://127.0.0.1:8001'|add:profiledetail.profile_img }}" height="170" alt="">
+
+            <ul>
+        <li style="margin-top: 5px">{{ user_profile.first_name }} {{ user_profile.last_name }}</li>
+        <li>{{ profiledetail.job }}</li>
+        <li>{{ profiledetail.location }}</li>
+            </ul>
+        </div>
+                </div>
+            </div>
+
+
+
+            <div class="col-md-4">
+                <div class="row">
+                               <h3 class="mt-4" style="padding-left: 30px">Posted</h3>
+                    {% for film in posts reversed %}
+                            <div class="col-md-12">
+
+
+                            <div class="card text-right" style="font-size: 14px; font-family: 'Courier New'">
+        {% for foo in users %}
+        {% if foo.username == film.user  %}
+            <small class="text-muted" style="font-weight: bolder">{{ foo.first_name }}</small>
+        {% endif %}
+    {% endfor %}
+
+        <a href="{% url 'details' film.slug %}">
+        <img src="{{ 'http://127.0.0.1:8001'|add:film.image }}" class="card-img-top" alt="...">
+        </a>
+
+    <ul class="list-group">
+    <li class="list-group-item"> <h5 class="card-title" style="font-weight:bold">{{ film.caption }}</h5></li>
+        <a href="{% url 'details' film.slug %}" class="tab-content">
+    <li class="list-group-item font-size: 2px">{{ film.content | truncatechars:50 |safe}}</li></a>
+    </ul>
+
+    <div class="card-body">
+    <span class="likes">Like Sayısı: {{ film.no_of_likes }}</span>
+    </div>
+
+
+</div>
+
+                            </div>
+
+                    {% endfor %}
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4">
+                <div class="row">
+                               <h3 class="mt-4" style="padding-left: 30px">Liked</h3>
+                    {% for likedpost in postliked %}
+                            <div class="col-md-12">
+                                <div class="card text-right" style="font-size: 14px; font-family: 'Courier New'">
+                                            {% for foo in users %}
+        {% if foo.username == likedpost.user  %}
+            <small class="text-muted" style="font-weight: bolder">{{ foo.first_name }}</small>
+        {% endif %}
+    {% endfor %}
+                                    <img src="{{ 'http://127.0.0.1:8001'|add:likedpost.image }}" class="card-img-top" alt="...">
+                                    <ul class="list-group">
+                                        <li class="list-group-item"> <h5 class="card-title" style="font-weight:bold">{{ likedpost.caption }}</h5></li>
+                                        <li class="list-group-item font-size: 2px">{{ likedpost.content | truncatechars:50 |safe}}</li>
+                                    </ul>
+
+                                        <div class="card-body">
+                                            <span class="likes">Like Sayısı: {{ likedpost.no_of_likes }}</span>
+                                        </div>
+
+
+
+
+
+
+                                </div><br>
+                            </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+</body>
+</html>

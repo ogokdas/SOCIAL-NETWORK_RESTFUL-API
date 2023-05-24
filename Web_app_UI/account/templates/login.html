@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <title>Login</title>
+</head>
+<body>
+
+    {% include 'partials/_navbar.html' %}
+
+<div class="container mt-5 w-50" style="padding-top: 35px">
+    <h1>Login</h1>
+    <hr>
+
+<form action="{% url 'login' %}" method="POST">
+
+   {% csrf_token %}
+  {% if error %}
+    <div class="alert alert-danger">
+        {{ error }}
+    </div>
+    {% endif %}
+
+    <div class="mb-3">
+    <label for="username">Username</label>
+    <input type="text" class="form-control" name="username" required>
+      <small id="UsernameHelp" class="form-text text-muted">We'll never share your username with anyone else.</small>
+  </div>
+
+  <div class="mb-3">
+    <label for="password">Password</label>
+    <input type="password" class="form-control" name="password" id="myInput"required>
+  </div>
+  <div class="mb-3">
+      <input type="checkbox" onclick="myFunction()"> Show Password
+  </div>
+  <button type="submit" class="btn btn-primary">Login</button>
+</form>
+    </div>
+
+<script>
+function myFunction() {
+  var x = document.getElementById("myInput");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+</script>
+
+</body>
+</html>

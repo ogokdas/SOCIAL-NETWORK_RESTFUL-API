@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <style>
+
+        .kutu{width: 300px;
+      height:350px;
+      border: 1px solid #000;margin: auto;margin-top: 100px;
+      }
+        .n
+        {color: black;
+            text-align: center
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+</head>
+<body>
+
+    {% include 'partials/_navbar.html' %}
+
+<div class="kutu">
+    <h1 style="margin-left: 10px">
+    Profile</h1>
+        <div style="margin-left: 10px">
+    <img src="{{ 'http://127.0.0.1:8001'|add:user_profile.profile_img }}" height="170" alt="">
+
+        <a href="{% url 'settings' %}">Edit</a></div>
+
+    <ul>
+<li style="margin-top: 5px">{{ user_object.first_name }} {{ user_object.last_name }}</li>
+<li>{{ user_profile.job }}</li>
+<li>{{ user_profile.location }}</li>
+
+</ul>
+            <a href="{% url 'profiledetail' user_profile.slug %}">Go to Posts</a>
+
+            {% if user.is_superuser %}
+                <a href="{% url 'admin:index' %}" style="float: right">Admin Table</a>
+            {% endif %}
+
+    </div>
+
+</body>
+</html>
